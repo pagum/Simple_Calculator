@@ -55,16 +55,27 @@ namespace Calculator
             Button b = (Button)sender;
             if(value != 0)
             {
+                if (b.Text == "sqrt")
+                    result.Text = Math.Sqrt(Double.Parse(result.Text)).ToString();
                 equal.PerformClick();
                 operation_pressed = true;
                 operation = b.Text;
                 equation.Text = value + " " + operation;
             }
-            operation = b.Text;
-            
-            value = Double.Parse(result.Text);
-            operation_pressed = true;
-            equation.Text = value + " " + operation;
+            else if(b.Text=="sqrt")
+            {
+                result.Text = Operators.Sqrt(Double.Parse(result.Text)).ToString();
+                value = Math.Sqrt(Double.Parse(result.Text));
+            }
+            else
+            {
+                operation = b.Text;
+                value = Double.Parse(result.Text);
+                operation_pressed = true;
+                equation.Text = value + " " + operation;
+            }
+         
+          
         }
 
         private void button17_Click(object sender, EventArgs e)
@@ -74,16 +85,17 @@ namespace Calculator
             switch (operation)
             {
                 case "+":
-                    result.Text=(value + double.Parse(result.Text)).ToString();
+                    result.Text = Operators.Add(value , double.Parse(result.Text)).ToString();
+                    //result.Text = Operators.Add(1,2).ToString();
                     break;
                 case "-":
-                    result.Text = (value - double.Parse(result.Text)).ToString();
+                    result.Text = Operators.Sub(value, double.Parse(result.Text)).ToString();
                     break;
                 case "*":
-                    result.Text = (value * double.Parse(result.Text)).ToString();
+                    result.Text = Operators.Mult(value, double.Parse(result.Text)).ToString();
                     break;
                 case "/":
-                    result.Text = (value / double.Parse(result.Text)).ToString();
+                    result.Text = Operators.Div(value, double.Parse(result.Text)).ToString();
                     break;
                 default:
                     break; 
